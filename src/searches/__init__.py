@@ -1,0 +1,1 @@
+from searches.product_search import ProductSearch
