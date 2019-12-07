@@ -2,6 +2,7 @@ from flask import Blueprint, jsonify, request, g, abort
 from flask_login import current_user, login_required
 from models import Order
 from app import db, app
+
 orders = Blueprint("orders", __name__)
 
 @orders.route("/", methods=["GET"])

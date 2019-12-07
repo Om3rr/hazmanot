@@ -5,6 +5,7 @@ from app import db, app
 products = Blueprint("products", __name__)
 
 
+@products.route("suggest/", methods=["GET"], defaults={'query': ''})
 @products.route("suggest/<query>", methods=["GET"])
 def suggest(query):
     products = Product.q(query)

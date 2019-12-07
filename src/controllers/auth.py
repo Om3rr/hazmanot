@@ -1,15 +1,13 @@
 from flask import Blueprint, jsonify, request, redirect
 from app import app, db, client
 from helpers.google_auth import get_google_provider_cfg, get_google_user
-from flask_login import login_user
+from flask_login import login_user, logout_user, login_required, current_user
 from models import User
 import os
 
 auth = Blueprint('auth', __name__)
 
-@auth.route("/test")
-def test():
-    return jsonify(os.environ.get("GOOGLE_CLIENT_ID", None))
+
 @auth.route('/login')
 def login():
     google_provider_cfg = get_google_provider_cfg()
@@ -22,6 +20,7 @@ def login():
         scope=["openid", "email", "profile"],
     )
     return redirect(request_uri)
+
 
 @auth.route("/login/callback")
 def callback():
@@ -37,18 +36,7 @@ def callback():
     return redirect("/")
 
 
-@auth.route('/signup')
-def signup():
-    return 'Signup'
-
-
 @auth.route('/logout')
 def logout():
-    return 'Logout'
-
-
-@auth.route("/login/<user_id>", methods=["GET"])
-def sign_in(user_id):
-    u = User.query.get(int(user_id))
-    login_user(u, remember=True)
-    return jsonify(u.jsonify())
+    logout_user()
+    return redirect("/")

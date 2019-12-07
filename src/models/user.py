@@ -1,7 +1,9 @@
 from app import db, login_manager
 import uuid
 from flask_login import UserMixin
-from flask import jsonify
+import operator
+from functools import reduce
+
 class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     username = db.Column(db.String, unique=True, nullable=False)
@@ -10,7 +12,7 @@ class User(db.Model, UserMixin):
     google_token = db.Column(db.String)
     profile_pic = db.Column(db.String)
     id_ = db.Column(db.String)
-    orders = db.relationship("Order", back_populates="user")
+    orders = db.relationship("Order", back_populates="user", lazy='dynamic')
 
 
 
@@ -21,15 +23,8 @@ class User(db.Model, UserMixin):
             "username": self.username,
             "email": self.email,
             "token": self.token,
+            "google_token": self.google_token,
+            "profile_pic": self.profile_pic,
+            "orders": reduce(operator.concat, self.orders.values("id")),
+            "products": "",
         }
-
-
-@login_manager.user_loader
-def load_user(user_id):
-    return User.query.get(user_id)
-
-
-@login_manager.unauthorized_handler
-def unauthorized():
-    # do stuff
-    return jsonify({"error": "Unauthorized request"})

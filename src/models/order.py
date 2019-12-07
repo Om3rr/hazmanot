@@ -6,6 +6,7 @@ class Order(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     name = db.Column(db.String)
     user = db.relationship("User", back_populates="orders")
+    order_products = db.relationship("OrderProduct", back_populates="order", lazy='dynamic')
 
 
 

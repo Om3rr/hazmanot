@@ -1,4 +1,4 @@
-from elasticsearch_dsl import Document, Date, Keyword, Text, Search, Completion
+from elasticsearch_dsl import Document, Date, Keyword, Text, Search, Completion, Float
 from elasticsearch_dsl.connections import connections
 from elasticsearch_dsl import Q
 import random
@@ -14,6 +14,9 @@ def randomString(stringLength=10):
 
 
 class Product(Document):
+    ItemName = Text()
+    ItemCode = Text()
+    ItemPrice = Float()
     title = Text()
     title_suggest = Completion()
     description = Text(analyzer='snowball')
@@ -35,13 +38,13 @@ class Product(Document):
     @staticmethod
     def q(query):
         s = Product.search()
-        q = (Q("wildcard", title="*{}*".format(query)) | Q("wildcard", tags="*{}*".format(query)))
+        q = (Q("wildcard", ItemCode="{}*".format(query)) | Q("wildcard", ItemName="*{}*".format(query)))
         return s.query(q).execute()
 
     def jsonify(self):
         return {
-            "title": self.title,
-            "description": self.description,
-            "tags": self.tags,
+            "title": self.ItemName,
+            "id": self.ItemCode,
+            "price": self.ItemPrice,
             "created_at": self.created_at
         }
