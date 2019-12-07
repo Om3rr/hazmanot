@@ -28,6 +28,3 @@ def show(order_id):
 @login_required
 def requirelogin():
     pass
-
-
-app.register_blueprint(orders, url_prefix="/orders")
