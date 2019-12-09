@@ -38,8 +38,16 @@ class Product(Document):
     @staticmethod
     def q(query):
         s = Product.search()
-        q = (Q("wildcard", ItemCode="{}*".format(query)) | Q("wildcard", ItemName="*{}*".format(query)))
+        q = Q()
+        for w in query.split(" "):
+            q = q & (Q("wildcard", ItemCode="{}*".format(w)) | Q("wildcard", ItemName="*{}*".format(w)))
         return s.query(q).execute()
+
+    @staticmethod
+    def newProduct(title):
+        p = Product(ItemName=title).save()
+        print(p)
+        return p
 
     def jsonify(self):
         return {

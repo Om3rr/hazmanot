@@ -1,4 +1,5 @@
 import Vue from 'vue'
+import {createProduct} from "../../apis/products";
 const state = {
     products: {}
 }
@@ -10,6 +11,10 @@ const getters = {
 }
 
 const actions = {
+    async createProduct({commit}, productTitle) {
+        const product = await createProduct(productTitle);
+        commit("PRODUCT_ADD", product)
+    },
     addProduct({commit}, product) {
         commit('PRODUCT_ADD', product)
     },

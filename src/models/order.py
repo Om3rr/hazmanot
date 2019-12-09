@@ -9,8 +9,6 @@ class Order(db.Model):
     order_products = db.relationship("OrderProduct", back_populates="order", lazy='dynamic')
 
 
-
-
     def jsonify(self):
         return {
             "id": self.id,
