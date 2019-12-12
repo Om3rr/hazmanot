@@ -9,9 +9,10 @@ products = Blueprint("products", __name__)
 @products.route("suggest/", methods=["GET"], defaults={'query': ''})
 @products.route("suggest/<query>", methods=["GET"])
 def suggest(query):
-    products = Product.q(query)
-    products = [p.to_dict() for p in products]
-    return jsonify({"products": products})
+    prods = Product.q(query)
+    prods = [p.to_dict() for p in prods]
+    return jsonify({"products": prods})
+
 
 @products.route("", methods=["POST"])
 def create():

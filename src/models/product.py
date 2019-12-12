@@ -3,6 +3,7 @@ from elasticsearch_dsl.connections import connections
 from elasticsearch_dsl import Q
 import random
 import string
+from typing import List
 
 connections.create_connection(hosts=['localhost'])
 
@@ -36,7 +37,7 @@ class Product(Document):
             p.save()
 
     @staticmethod
-    def q(query):
+    def q(query) -> List['Product']:
         s = Product.search()
         q = Q()
         for w in query.split(" "):
