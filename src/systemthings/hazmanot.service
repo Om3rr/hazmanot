@@ -1,0 +1,13 @@
+[Unit]
+Description=uWSGI instance to serve myproject
+After=network.target
+
+[Service]
+User=ubuntu
+Group=www-data
+WorkingDirectory=/home/ubuntu/hazmanot
+Environment="PATH=/home/ubuntu/hazmanot/hazmanotenv/bin"
+ExecStart=/home/ubuntu/hazmanot/hazmanotenv/bin/uwsgi --ini myproject.ini
+
+[Install]
+WantedBy=multi-user.target
