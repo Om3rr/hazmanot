@@ -1,0 +1,1 @@
+cp hazmanot.service /etc/systemd/system/hazmanot.service
