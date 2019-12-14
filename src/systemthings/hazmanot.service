@@ -6,8 +6,8 @@ After=network.target
 User=ubuntu
 Group=www-data
 WorkingDirectory=/home/ubuntu/hazmanot
-Environment="PATH=/home/ubuntu/hazmanot/hazmanotenv/bin"
-ExecStart=/home/ubuntu/hazmanot/hazmanotenv/bin/uwsgi --ini hazmanot.ini
+Environment="PATH=/home/ubuntu/hazmanot/src/hazmanotenv/bin"
+ExecStart=/home/ubuntu/hazmanot/src/hazmanotenv/bin/uwsgi --ini hazmanot.ini
 
 [Install]
 WantedBy=multi-user.target
