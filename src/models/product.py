@@ -41,7 +41,7 @@ class Product(Document):
         s = Product.search()
         q = Q()
         for w in query.split(" "):
-            q = q & (Q("wildcard", ItemCode="{}*".format(w)) | Q("wildcard", ItemName="*{}*".format(w)))
+            q = q & (Q("wildcard", ItemName="*{}*".format(w)))
         return s.query(q).execute()
 
     @staticmethod

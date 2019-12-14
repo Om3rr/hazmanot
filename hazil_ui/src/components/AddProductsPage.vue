@@ -1,5 +1,6 @@
 <template>
     <div>
+        Connected :)
         <SearchBar/>
         ------------
         <CurrentCart/>

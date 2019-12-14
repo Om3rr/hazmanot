@@ -17,7 +17,7 @@ def suggest(query):
 @products.route("", methods=["POST"])
 def create():
     product_raw = request.get_json()
-    product = Product(ItemName=product_raw.get("title"), ItemCode=uuid.uuid4().int)
+    product = Product(ItemName=product_raw.get("title"), ItemCode=str(uuid.uuid4().int))
     print(product)
     product.save()
     return jsonify({"product": product.to_dict()})

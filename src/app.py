@@ -6,7 +6,10 @@ from dotenv import load_dotenv
 from config.google import GOOGLE_CLIENT_ID
 
 load_dotenv()
-app = Flask(__name__)
+# app = Flask(__name__,
+#             static_folder = "./dist/static",
+#             template_folder = "./dist")
+app = Flask(__name__, static_folder = "../hazil_ui/dist/static", template_folder = "../hazil_ui/dist")
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///example.sqlite"
 app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
 db = SQLAlchemy(app)

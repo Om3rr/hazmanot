@@ -3,14 +3,15 @@ from app import app, db
 from flask_login import current_user
 from flask_login import login_required
 import controllers
-from flask import request, jsonify
+import requests
+from flask import request, jsonify, render_template
 
-
-@app.route("/", methods=["GET"])
-@login_required
-def hello():
-    return "Hello {}".format(current_user.username)
-
+@app.route('/', defaults={'path': ''})
+@app.route('/<path:path>')
+def catch_all(path):
+    if app.debug:
+        return requests.get('http://localhost:8080/{}'.format(path)).text
+    return render_template("index.html")
 
 @app.errorhandler(404)
 @app.errorhandler(405)

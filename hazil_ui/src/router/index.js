@@ -1,13 +1,31 @@
 import VueRouter from 'vue-router'
 import Vue from 'vue'
-import AddProductsPage from '../components/AddProductsPage'
-import Bar from '../components/Bar'
+import ProductsPage from '../components/productsPage/ProductsPage'
+import LoginPage from '../components/loginPage/LoginPage'
+import AuthPage from '../components/AuthPage'
+import store from '../store'
 
+const meta = {requiresAuth: true};
 const routes = [
-    { path: '/', component: AddProductsPage },
-    { path: '/bar', component: Bar }
+    {path: '/', component: ProductsPage, meta},
+    {path: '/user/login', component: LoginPage, meta: {requiresAuth: false}},
+    {path: '/user/auth', component: AuthPage},
 ];
 Vue.use(VueRouter);
-export default new VueRouter({
+const router = new VueRouter({
+    mode: 'history',
     routes // short for `routes: routes`
-})
+});
+
+router.beforeEach((to, from, next) => {
+    if (to.matched.some(route => route.meta.requiresAuth)) {
+        if (store.state.user.loggedIn) {
+            next();
+        } else {
+            next({path: '/user/auth', query: {redirect: to.path}});
+        }
+    }
+    next();
+});
+
+export default router;

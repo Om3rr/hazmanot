@@ -3,8 +3,10 @@ import {getMe} from "../../apis/orders";
 const state = {
     username: null,
     email: null,
-    profile_pic: null,
+    profilePic: null,
     orders: 0,
+    loggedIn: false,
+    loading: true
 }
 
 const getters = {
@@ -13,16 +15,28 @@ const getters = {
 
 const mutations = {
     LOGIN(state, {username, email, profile_pic, orders}) {
+        state.loggedIn = true
+        state.loading = false
         state.username = username
         state.email = email
-        state.profile_pic = profile_pic
+        state.profilePic = profile_pic
         state.orders = orders
+    },
+    LOGIN_FAILED(state) {
+        state.loggedIn = false;
+        state.loading = false
     }
 }
 
 const actions = {
     async initUser({commit}) {
-        commit('LOGIN', await getMe())
+        try{
+            const user = await getMe()
+            commit('LOGIN', user)
+        }
+        catch (err) {
+            commit("LOGIN_FAILED")
+        }
     }
 }
 
