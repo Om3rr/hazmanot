@@ -5,7 +5,7 @@ After=network.target
 [Service]
 User=ubuntu
 Group=www-data
-WorkingDirectory=/home/ubuntu/hazmanot
+WorkingDirectory=/home/ubuntu/hazmanot/src
 Environment="PATH=/home/ubuntu/hazmanot/src/hazmanotenv/bin"
 ExecStart=/home/ubuntu/hazmanot/src/hazmanotenv/bin/uwsgi --ini hazmanot.ini
 
