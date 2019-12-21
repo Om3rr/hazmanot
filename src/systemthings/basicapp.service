@@ -1,0 +1,13 @@
+[Unit]
+Description=uWSGI instance to serve myproject
+After=network.target
+
+[Service]
+User=ubuntu
+Group=www-data
+WorkingDirectory=/home/ubuntu/basicapp
+Environment="PATH=/home/ubuntu/basicapp/basicapp/bin"
+ExecStart=/home/ubuntu/basicapp/basicapp/bin/uwsgi --ini basicapp.ini
+
+[Install]
+WantedBy=multi-user.target
