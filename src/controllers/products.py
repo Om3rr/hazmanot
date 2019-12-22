@@ -10,7 +10,7 @@ products = Blueprint("products", __name__)
 @products.route("suggest/<query>", methods=["GET"])
 def suggest(query):
     prods = Product.q(query)
-    prods = [p.to_dict() for p in prods]
+    prods = [p.jsonify() for p in prods]
     return jsonify({"products": prods})
 
 
