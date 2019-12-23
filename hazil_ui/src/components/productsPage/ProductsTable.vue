@@ -2,8 +2,8 @@
     <div class="products">
         <div class="products--line products--header">
             <div class="products--line--item--small products--header">תיאור</div>
+            <div class="products--line--item products--header">מחיר</div>
             <div class="products--line--item products--header">מק"ט</div>
-            <div class="products--line--item products--header">תיאור מוצר</div>
             <div class="products--line--item products--header">כמות</div>
             <div class="products--line--item products--header">הוסף</div>
         </div>

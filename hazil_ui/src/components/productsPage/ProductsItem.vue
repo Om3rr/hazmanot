@@ -1,8 +1,8 @@
 <template>
     <div class="products--line">
             <div class="products--line--item--small">{{product.ItemName}}</div>
-            <div class="products--line--item">מק"ט</div>
-            <div class="products--line--item">תיאור מוצר</div>
+            <div class="products--line--item">{{product.ItemPrice}}</div>
+            <div class="products--line--item">{{product.ItemCode}}</div>
             <div class="products--line--item">
                 <button @click="currentAmount = parseInt(currentAmount) + 1">
                     +
