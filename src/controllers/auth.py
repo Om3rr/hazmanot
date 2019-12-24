@@ -18,7 +18,8 @@ def token():
     user.google_token = token
     user.username = g_user.get("name")
     db.session.add(user)
-    db.session.flush()
+    db.session.commit()
+    db.session.refresh(user)
     login_user(user, remember=True)
     return jsonify(user.jsonify())
 

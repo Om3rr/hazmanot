@@ -6,7 +6,7 @@ from functools import reduce
 
 class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    username = db.Column(db.String, unique=True, nullable=False)
+    username = db.Column(db.String, nullable=False)
     email = db.Column(db.String, unique=True, nullable=False)
     token = db.Column(db.String, unique=True, nullable=False, default=lambda: str(uuid.uuid1()))
     google_token = db.Column(db.String)
@@ -25,6 +25,5 @@ class User(db.Model, UserMixin):
             "token": self.token,
             "google_token": self.google_token,
             "profile_pic": self.profile_pic,
-            "orders": reduce(operator.concat, self.orders.values("id")),
             "products": "",
         }
