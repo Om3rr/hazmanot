@@ -1,6 +1,6 @@
 <template>
     <div class="search-bar-container">
-        <input class="search-bar" :value="search" v-on:input="onInput" type="text"/>
+        <input class="search-bar" placeholder="חיפוש" :value="search" v-on:input="onInput" type="text"/>
     </div>
 </template>
 

@@ -1,9 +1,13 @@
 <template>
   <div id="app">
+
     <MainBar v-if="loggedIn"/>
+    <div class="main-view">
+      <router-view></router-view>
+    </div>
     <!-- route outlet -->
     <!-- component matched by the route will render here -->
-    <router-view></router-view>
+
   </div>
 </template>
 
@@ -26,12 +30,19 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss">
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+  display: flex;
+  max-height: 100vh;
+  flex-direction: column;
+  .main-view {
+    max-height: calc(100vh - 40px)
+  }
+
 }
 </style>

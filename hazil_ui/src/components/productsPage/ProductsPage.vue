@@ -1,7 +1,7 @@
 <template>
-    <div>
-        <ProductsSearchbar v-on:input="suggest" :search="search"/>
-        <ProductsTable :suggestions="suggestions"/>
+    <div class="products-page">
+        <ProductsSearchbar class="searchbar" v-on:input="suggest" :search="search"/>
+        <ProductsTable class="products-table" :suggestions="suggestions"/>
     </div>
 </template>
 
@@ -20,6 +20,8 @@
         async mounted() {
             if(this.$route.query.query) {
                 await this.suggest(this.$route.query.query);
+            } else {
+                await this.suggest()
             }
         },
         methods: {
@@ -32,6 +34,14 @@
     };
 </script>
 
-<style scoped>
-
+<style scoped lang="scss">
+    .products-page {
+        display: flex;
+        flex-direction: column;
+        max-height: inherit;
+        .products-table {
+            overflow-y: auto;
+            max-height: 100%;
+        }
+    }
 </style>

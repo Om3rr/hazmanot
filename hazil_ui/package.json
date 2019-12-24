@@ -6,10 +6,11 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "start": "webpack-dev-server --open --config webpack.dev.js",
-    "deploy": "aws s3 cp ./hazil_ui/dist s3://hazmanot/ --recursive --acl public-read",
+    "deploy": "yarn build && python3 -m awscli s3 cp ./dist s3://hazmanot/ --recursive --acl public-read",
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
+    "@fortawesome/vue-fontawesome": "^0.1.9",
     "axios": "^0.19.0",
     "core-js": "^3.4.3",
     "debounce": "^1.2.0",
