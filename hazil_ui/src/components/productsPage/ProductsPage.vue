@@ -1,6 +1,6 @@
 <template>
     <div>
-        <ProductsSearchbar v-on:input="suggest"/>
+        <ProductsSearchbar v-on:input="suggest" :search="search"/>
         <ProductsTable :suggestions="suggestions"/>
     </div>
 </template>
@@ -13,12 +13,20 @@
         components: {ProductsSearchbar, ProductsTable},
         data() {
             return {
-                suggestions: []
+                suggestions: [],
+                search: ''
+            }
+        },
+        async mounted() {
+            if(this.$route.query.query) {
+                await this.suggest(this.$route.query.query);
             }
         },
         methods: {
             async suggest(query) {
-               this.suggestions = await suggestProducts(query)
+                this.search = query;
+                this.suggestions = await suggestProducts(query)
+                this.$router.push({ query: { query }})
             },
         }
     };

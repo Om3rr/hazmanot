@@ -1,19 +1,20 @@
 <template>
-    <div class="products--line">
-            <div class="products--line--item--small">{{product.ItemName}}</div>
-            <div class="products--line--item">{{product.ItemPrice}}</div>
-            <div class="products--line--item">{{product.ItemCode}}</div>
-            <div class="products--line--item">
-                <button @click="currentAmount = parseInt(currentAmount) + 1">
-                    +
-                </button>
-                <input v-model="currentAmount" type="number" min="1">
-                <button :disabled="currentAmount === 1" @click="currentAmount = parseInt(currentAmount) - 1">
-                    -
-                </button>
-            </div>
-            <div class="products--line--item">הוסף</div>
+    <div class="product">
+        <div class="header">
+            {{ product.ItemName }}
         </div>
+        <div class="body">
+            <div class="item">
+                מחיר: {{ product.ItemPrice}}
+            </div>
+            <div class="item">
+                 מק״ט: {{ product.ItemCode}}
+            </div>
+            <div class="image" @click="goToShow()">
+                <img src="https://res.cloudinary.com/shufersal/image/upload/f_auto,q_auto/v1551800918/prod/product_images/products_medium/BNV56_M_P_7290015765626_1.png">
+            </div>
+        </div>
+    </div>
 </template>
 
 <script>
@@ -23,10 +24,16 @@
             return {
                 currentAmount: 1
             }
+        },
+        methods: {
+           goToShow() {
+                this.$router.push(`/products/${this.product.id}`)
+            }
         }
+
     };
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 
 </style>

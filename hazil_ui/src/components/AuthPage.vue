@@ -16,7 +16,7 @@
                 if(this.loading) {
                     return
                 }
-                this.loggedIn ? this.$router.push({path: this.$route.query.redirect}) : this.$router.push({path: "/user/login"});
+                this.loggedIn ? this.$router.push({path: this.$route.query.redirect, query: this.$route.query.query}) : this.$router.push({path: "/user/login"});
             }
         },
 

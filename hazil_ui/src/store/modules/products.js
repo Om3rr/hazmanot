@@ -20,7 +20,7 @@ const actions = {
     },
     deleteProduct({commit}, product) {
         commit("PRODUCT_DELETE", product)
-    }
+    },
 }
 
 const mutations = {
@@ -39,7 +39,7 @@ const mutations = {
             Vue.set(state.products[product.ItemCode], 'amount', state.products[product.ItemCode].amount - 1)
         }
     }
-}
+};
 
 export default {
     state,

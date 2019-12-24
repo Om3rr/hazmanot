@@ -1,12 +1,5 @@
 <template>
     <div class="products">
-        <div class="products--line products--header">
-            <div class="products--line--item--small products--header">תיאור</div>
-            <div class="products--line--item products--header">מחיר</div>
-            <div class="products--line--item products--header">מק"ט</div>
-            <div class="products--line--item products--header">כמות</div>
-            <div class="products--line--item products--header">הוסף</div>
-        </div>
         <ProductsItem v-for="product in suggestions" :key="product.ItemCode" v-bind="{product: product}"/>
     </div>
 </template>
@@ -27,30 +20,28 @@
 <style scoped lang="scss">
     .products {
         direction: rtl;
-        display: flex;
-        flex-direction: column;
-        /deep/ &--line {
-            padding: 0.3em 0.5em;
-            &.products--header {
-                padding: 1em 0.5em;
-                border-bottom: 1px solid #ccc;
-                font-weight: 500;
-                color: #fff;
-                background: linear-gradient(to bottom, rgba(234,47,44,1) 0%,rgba(174,41,10,1) 100%);
+        display: inline-grid;
+        grid-template-columns: auto auto auto auto auto auto;
+        grid-gap: 1em;
+        /deep/.product {
+            border: 1px solid black;
+            .header {
+                background: rgba(3, 3, 3, 0.12);
+                border-bottom: 1px solid black;
+                padding: 0.3em;
             }
-            flex: auto;
-            display: flex;
-            flex-direction: row;
-            &--item {
-                flex: 1 1 0;
-                text-align: right;
-                &--small {
-                    flex: 1 1 0;
-                    text-align: right;
+            .body {
+                display: flex;
+                flex-direction: column;
+                min-height: 150px;
+                align-items: baseline;
+                padding: 1em;
+                padding-bottom: 0;
+                .item {
+                    display: block;
                 }
-                input {
-                    width: 15%;
-                    text-align: center;
+                .image {
+                    padding-top: 1em;
                 }
             }
         }

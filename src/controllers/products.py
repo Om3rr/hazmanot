@@ -13,6 +13,10 @@ def suggest(query):
     prods = [p.jsonify() for p in prods]
     return jsonify({"products": prods})
 
+@products.route("<product_id>", methods=["GET"])
+def show(product_id):
+    product = Product.query.filter_by(id=int(product_id)).first()
+    return jsonify({"product": product.jsonify()})
 
 @products.route("", methods=["POST"])
 def create():

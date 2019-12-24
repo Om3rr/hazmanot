@@ -33,4 +33,5 @@ class Product(db.Model):
             "ItemName": self.ItemName,
             "ItemCode": self.ItemCode,
             "ItemPrice": self.ItemPrice,
+            "id": self.id
         }

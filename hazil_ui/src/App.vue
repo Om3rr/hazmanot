@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <h1>Hello {{username}}</h1>
+    <MainBar v-if="loggedIn"/>
     <!-- route outlet -->
     <!-- component matched by the route will render here -->
     <router-view></router-view>
@@ -9,17 +9,20 @@
 
 <script>
 import {mapActions, mapState} from 'vuex'
+import MainBar from "./components/MainBar";
 export default {
   name: 'app',
-    mounted() {
+  components: {MainBar},
+  mounted() {
       this.initUser();
     },
     methods: {
         ...mapActions('user', {initUser: "initUser"})
     },
     computed: {
-        ...mapState('user', {username: 'username'})
+      ...mapState('user', {loggedIn: "loggedIn"})
     }
+
 }
 </script>
 
@@ -30,6 +33,5 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
 }
 </style>

@@ -1,6 +1,6 @@
 <template>
-    <div>
-        <input v-model="search" v-on:input="onInput" type="text"/>
+    <div class="search-bar-container">
+        <input class="search-bar" :value="search" v-on:input="onInput" type="text"/>
     </div>
 </template>
 
@@ -8,21 +8,28 @@
     import _ from "lodash";
 
     export default {
-        data() {
-            return {
-                search: "",
-                products: []
-            }
-        },
+        props: [
+            "search"
+        ],
         methods: {
-            emitInput() {
-                this.$emit('input', this.search)
+            emitInput($event) {
+                this.$emit('input', $event.target.value)
             },
-            onInput: _.debounce(function(){this.emitInput()}, 500),
+            onInput: _.debounce(function(e){this.emitInput(e)}, 500),
         }
     };
 </script>
 
-<style scoped>
-
+<style scoped lang="scss">
+    .search-bar-container {
+        text-align: right;
+        margin-right: 1.4em;
+    }
+    .search-bar {
+        font-size: 18px;
+        padding: 0.3em;
+        direction: rtl;
+        margin: 0.5em;
+        width: 20em;
+    }
 </style>
