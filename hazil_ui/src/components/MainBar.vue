@@ -2,6 +2,7 @@
     <div class="bar">
         <div class="title">Hello {{ username }}</div>
         <div class="spacer"></div>
+        <div class="badge" @click="goToCart()"><font-awesome-icon icon="shopping-cart" /></div>
         <div class="badge"><img :src="profilePic"></div>
     </div>
 </template>
@@ -11,8 +12,18 @@
 
     export default {
         computed: {
-            ...mapState('user', {username: 'username', profilePic: "profilePic"})
-        }
+            ...mapState('user', {username: 'username', profilePic: "profilePic"}),
+        },
+        methods: {
+            goToCart() {
+                this.onCart() ? this.$router.push('/') : this.$router.push("/cart")
+            },
+            onCart() {
+                const {currentRoute: {fullPath}} = this.$router;
+                return fullPath === '/cart'
+            }
+        },
+
     }
 </script>
 
@@ -34,6 +45,10 @@
                 border-radius: 3em;
                 height: 32px;
                 width: 32px;
+            }
+            svg {
+                height: 24px;
+                width: 24px;
             }
 
         }

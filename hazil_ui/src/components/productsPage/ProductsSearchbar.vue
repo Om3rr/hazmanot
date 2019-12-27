@@ -22,8 +22,7 @@
 
 <style scoped lang="scss">
     .search-bar-container {
-        text-align: right;
-        margin-right: 1.4em;
+        text-align: center;
     }
     .search-bar {
         font-size: 18px;

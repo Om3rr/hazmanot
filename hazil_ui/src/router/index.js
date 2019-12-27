@@ -3,6 +3,7 @@ import Vue from 'vue'
 import ProductsPage from '../components/productsPage/ProductsPage'
 import LoginPage from '../components/loginPage/LoginPage'
 import ProductPage from '../components/productPage/ProductPage'
+import CartPage from '../components/cartPage/cartPage'
 import AuthPage from '../components/AuthPage'
 import store from '../store'
 
@@ -10,6 +11,7 @@ const meta = {requiresAuth: true};
 const routes = [
     {path: '/', component: ProductsPage, meta},
     {path: '/products/:productId', component: ProductPage, meta},
+    {path: '/cart', component: CartPage, meta},
     {path: '/user/login', component: LoginPage, meta: {requiresAuth: false}},
     {path: '/user/auth', component: AuthPage},
 ];
