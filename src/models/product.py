@@ -16,6 +16,7 @@ class Product(db.Model):
     ItemCode = db.Column(db.Text)
     ItemPrice = db.Column(db.Float)
     ItemName = db.Column(db.Text)
+    picture = db.Column(db.Text)
 
     @staticmethod
     def q(query) -> List['Product']:
