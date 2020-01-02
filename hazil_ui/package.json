@@ -6,7 +6,7 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "start": "webpack-dev-server --open --config webpack.dev.js",
-    "deploy": "yarn build && python3 -m awscli s3 cp ./dist s3://hazmanot/ --recursive --acl public-read",
+    "deploy": "yarn build && python -m awscli s3 cp ./dist s3://hazmanot/ --recursive --acl public-read",
     "lint": "vue-cli-service lint"
   },
   "dependencies": {

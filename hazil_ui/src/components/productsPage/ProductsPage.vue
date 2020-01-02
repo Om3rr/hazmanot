@@ -27,8 +27,10 @@
         methods: {
             async suggest(query) {
                 this.search = query;
-                this.suggestions = await suggestProducts(query)
-                this.$router.push({ query: { query }})
+                this.suggestions = await suggestProducts(query);
+                if(this.$route.query.query !== query) {
+                    this.$router.push({ query: { query }})
+                }
             },
         }
     };

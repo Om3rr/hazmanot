@@ -54,7 +54,7 @@
                 }
                 .image {
                     padding-top: 1em;
-                    img { object-fit: cover; }
+                    img { object-fit: cover; height: 7em;}
                     flex: auto;
                 }
                 .price {
