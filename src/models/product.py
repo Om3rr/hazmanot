@@ -13,15 +13,30 @@ def randomString(stringLength=10):
 
 class Product(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    ItemCode = db.Column(db.Text)
-    ItemPrice = db.Column(db.Float)
-    ItemName = db.Column(db.Text)
+    ItemCode = db.Column(db.String(16))
+    ItemPrice = db.Column(db.Float(16))
+    ItemName = db.Column(db.String(32))
     picture = db.Column(db.Text)
 
     @staticmethod
-    def q(query) -> List['Product']:
+    def q(query, user=None) -> List['Product']:
         qq = [Product.ItemName.like("%{q}%".format(q=q)) for q in query.split(" ")]
-        return db.session.query(Product).filter(db.and_(*qq)).limit(20).all()
+        return sorted(db.session.query(Product).filter(db.and_(*qq)).all(), key=lambda p: Product.score_result(p, query, user), reverse=True)[0:50]
+
+    @staticmethod
+    def score_result(product, query, user=None):
+        if len(query) < 1: return 0
+        score = 0
+        splitted_item_name = product.ItemName.split(" ")
+        for w in query.split(" "):
+            if w in splitted_item_name: score += len(w)
+            for ww in splitted_item_name:
+                if ww.startswith(w): score += len(w)
+        #print(product.ItemName, query, score)
+        return score
+
+
+
 
     @staticmethod
     def newProduct(title):

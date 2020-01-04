@@ -13,6 +13,7 @@
         },
         watch: {
             loading() {
+                debugger;
                 if(this.loading) {
                     return
                 }

@@ -1,22 +1,18 @@
 <template>
-    <div class="product">
-        <div class="header">
-            {{ product.ItemName }}
-        </div>
-        <div class="body">
-            <div class="item">
-                מק״ט: {{ product.ItemCode}}
+    <div class="product--mobile">
+            <div class="item--nogrow" @click="addToCart()">
+                <font-awesome-icon icon="plus"/>
             </div>
-            <div class="image" @click="goToShow()">
+        <div class="item--nogrow" @click="goToShow()">
                 <img :src="product.ItemImage">
             </div>
-            <div class="item" @click="addToCart()">
-                <div>הוסף לעגלה</div>
+            <div class="item">
+            {{ product.ItemName }}
             </div>
-            <div class="price">
-                מחיר: {{ product.ItemPrice}}
+
+            <div class="item--nogrow">
+                {{ product.ItemPrice}}
             </div>
-        </div>
     </div>
 </template>
 
