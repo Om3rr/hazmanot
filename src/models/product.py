@@ -27,6 +27,7 @@ class Product(db.Model):
     def score_result(product, query, user=None):
         if len(query) < 1: return 0
         score = 0
+        if query in product.ItemName: score += 50
         splitted_item_name = product.ItemName.split(" ")
         for w in query.split(" "):
             if w in splitted_item_name: score += len(w)
