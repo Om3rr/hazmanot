@@ -21,7 +21,7 @@ class Product(db.Model):
     @staticmethod
     def q(query, user=None) -> List['Product']:
         qq = [Product.ItemName.like("%{q}%".format(q=q)) for q in query.split(" ")]
-        return sorted(db.session.query(Product).filter(db.and_(*qq)).all(), key=lambda p: Product.score_result(p, query, user), reverse=True)[0:50]
+        return sorted(db.session.query(Product).filter(db.and_(*qq)).all(), key=lambda p: Product.score_result(p, query, user), reverse=True)[0:100]
 
     @staticmethod
     def score_result(product, query, user=None):
