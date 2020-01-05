@@ -33,7 +33,6 @@ class Product(db.Model):
             if w in splitted_item_name: score += len(w)
             for ww in splitted_item_name:
                 if ww.startswith(w): score += len(w)
-        #print(product.ItemName, query, score)
         return score
 
 

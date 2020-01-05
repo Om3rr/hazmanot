@@ -5,25 +5,27 @@
 </template>
 
 <script>
-    import {mapState} from 'vuex';
-    export default {
-        props: ["toPath", "failPath"],
-        computed: {
-            ...mapState('user', ['loading', 'loggedIn'])
-        },
-        watch: {
-            loading() {
-                debugger;
-                if(this.loading) {
-                    return
-                }
-                this.loggedIn ? this.$router.push({path: this.$route.query.redirect, query: this.$route.query.query}) : this.$router.push({path: "/user/login"});
+import { mapState } from 'vuex'
+export default {
+    props: ['toPath', 'failPath'],
+    computed: {
+        ...mapState('user', ['loading', 'loggedIn']),
+    },
+    watch: {
+        loading() {
+            debugger
+            if (this.loading) {
+                return
             }
+            this.loggedIn
+                ? this.$router.push({
+                      path: this.$route.query.redirect,
+                      query: this.$route.query.query,
+                  })
+                : this.$router.push({ path: '/user/login' })
         },
-
-    }
+    },
+}
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

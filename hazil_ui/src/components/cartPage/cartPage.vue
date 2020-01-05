@@ -1,19 +1,17 @@
 <template>
     <div>
-        {{products}}
+        {{ products }}
     </div>
 </template>
 
 <script>
-    import {mapState} from 'vuex'
+import { mapState } from 'vuex'
 
-    export default {
-        computed: {
-            ...mapState('products', ['products'])
-        }
-    }
+export default {
+    computed: {
+        ...mapState('products', ['products']),
+    },
+}
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>
